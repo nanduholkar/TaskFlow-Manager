@@ -7,11 +7,12 @@ const connectDB = require("./config/db.js")
 
 const app = express()
 
+const authRoutes = require("./routes/authRoutes.js")
+const userRoutes = require("./routes/userRoutes.js")
+const taskRoutes = require("./routes/taskRoutes.js")
+const reportRoutes = require("./routes/reportRoutes.js")
 
-// import authRoutes from "./routes/authRoutes.js"
-// import reportRoutes from "./routes/reportRoutes.js"
-// import taskRoutes from "./routes/taskRoutes.js"
-// import userRoutes from "./routes/userRoutes.js"
+
 
 // Middleware to handel CORS
 app.use(
@@ -24,15 +25,16 @@ app.use(
 
 //middleware
 app.use(express.json())
+app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 //connect to database
 connectDB()
 
 // Routes
-// app.use("/api/auth", authRoutes)
-// app.use("/api/report", reportRoutes)
-// app.use("/api/task", taskRoutes)
-// app.use("/api/user", userRoutes)
+app.use("/api/auth", authRoutes)
+app.use("/api/user", userRoutes)
+app.use("/api/task", taskRoutes)
+app.use("/api/report", reportRoutes)
 
 // Start Server
 const PORT = process.env.PORT || 5000
