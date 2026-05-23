@@ -26,7 +26,7 @@ const registerUser = async (req, res) => {
         // Check if user already exists
         const userExists = await User.findOne({email});
         if(userExists){
-            return res.status(400).json({message: "User already exists"})
+            return res.status(409).json({message: "User already exists"})
         }
 
         // Determine if the user is an admin based on the invite token
