@@ -33,8 +33,9 @@ connectDB()
 // Routes
 app.use("/api/auth", authRoutes)
 app.use("/api/user", userRoutes)
-app.use("/api/task", taskRoutes)
+app.use("/api/tasks", taskRoutes)
 app.use("/api/report", reportRoutes)
+app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 // Start Server
 const PORT = process.env.PORT || 5000
