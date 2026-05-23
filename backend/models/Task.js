@@ -15,7 +15,7 @@ const taskSchema = new mongoose.Schema({
     createdBy: [{type: mongoose.Schema.Types.ObjectId, ref: "User"}], 
     attachment: [{type: String}],
     todoChecklist: [todoSchema],
-    Progress: {type: Number, default: 0}
+    progress: {type: Number, default: 0}
 })
 
 module.exports = mongoose.model("Task", taskSchema)
