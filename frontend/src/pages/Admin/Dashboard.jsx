@@ -14,7 +14,7 @@ import { addThousandsSeparator } from "../../utils/helper.js";
 
 import { LuArrowRight } from "react-icons/lu";
 
-import TaskListTable from "../../components/layout/TaskListTable.jsx";
+import TaskListTable from "../../components/TaskListTable.jsx";
 import CustomPieChart from "../../components/Charts/CustomPieChart.jsx";
 import CustomBarChart from "../../components/Charts/CustomBarChart.jsx";
 
