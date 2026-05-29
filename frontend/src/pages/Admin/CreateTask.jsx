@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import moment from "moment"
 import { LuTrash2 } from 'react-icons/lu';
 import SelectDropDown from '../../components/Inputs/SelectDropDown.jsx';
+import SelectUsers from '../../components/Inputs/SelectUsers.jsx'
 
 
 
@@ -115,16 +116,47 @@ const CreateTask = () => {
             </div>
 
             <div className='grid grid-cols-12 gap-4 mt-2'>
+              
               <div className='col-span-6 md:col-span-4'>
-                <label className="text-xs font-medium text-slate-600">Priority</label>   
+                <label className="text-xs font-medium text-slate-600">Priority</label>
+                <div className='mt-2'>
                 <SelectDropDown
                   options={PRIORITY_DATA}
                   value={taskData.priority}
                   onChange={(value) => handleValueChange("priority", value)}
                   placeholder="Select Priority"
-                />
+                  />
+                </div>   
               </div>
+              
+              <div className='col-span-6 md:col-span-4 '>
+                <label className="text-xs font-medium text-slate-600">Due Date</label>
+                <div className='mt-2'>
+                  <input
+                  placeholder='Create App UI'
+                  type="date"
+                  className='form-input mt-2'
+                  value={taskData.dueDate || ""}
+                  onChange={({target}) => 
+                    handleValueChange("dueDate", target.value)} />
+                </div>
+              
+              </div>
+
+              <div className='col-span-6 md:col-span-3'>
+                <label className="text-xs font-medium text-slate-600">Assign To</label> 
+                <SelectUsers 
+                selectedUsers={taskData.assignedTo}
+                setSelectedUsers={(value) => {
+                  handleValueChange("assignedTo", value)
+                }} >                 
+                </SelectUsers>
+              </div>
+    
             </div>
+
+
+            
 
         
 
