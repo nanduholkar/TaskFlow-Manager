@@ -10,6 +10,7 @@ import { LuTrash2 } from 'react-icons/lu';
 import SelectDropDown from '../../components/Inputs/SelectDropDown.jsx';
 import SelectUsers from '../../components/Inputs/SelectUsers.jsx'
 import TodoListInput from "../../components/Inputs/TodoListInput.jsx"
+import AddAttachmentInput from "../../components/Inputs/AddAttachmentInput.jsx"
 
 
 
@@ -62,7 +63,32 @@ const CreateTask = () => {
   }
 
   const handleSubmit = async () => {
-
+    setError(null)
+    if(!taskData.title.trim()){
+      setError("Title is required")
+      return;
+    }
+    if(!taskData.description.trim()){
+      setError("Description is Required")
+      return
+    }
+    if(!taskData.dueDate){
+      setError('Due Date is Required')
+      return
+    }
+    if(!taskData.assignedTo?.length === 0){
+      setError("Task not Assigned to any member")
+      return
+    }
+    if(taskData.todoChecklist?.length === 0){
+      setError("Add atleast one todo task")
+      return
+    }
+    if(taskId){
+      updateTask()
+      return
+    }
+    createTask()
   }
 
   const getTaskDetailsById = async () => {
@@ -75,6 +101,7 @@ const CreateTask = () => {
     <DashboardLayout activeMenu="Create Task">
       <div className='mt-5'>
         <div className='grid grid-cols-1 md:grid-cols-4 mt-4' >
+
           <div className='form-card col-span-3'>
 
             <div className='flex items-center justify-between'>
@@ -165,6 +192,33 @@ const CreateTask = () => {
                   }
                 />
             </div>
+
+            <div className='mt-3'>
+              <label className="text-xs font-medium text-slate-600">Add Attachment</label>
+              <AddAttachmentInput 
+                attachment={taskData?.attachment}
+                setAttachment={(value) => 
+                  handleValueChange("attachment", value)
+                }
+              />
+            </div>
+            
+            <div>
+            {error && (
+              <p className='text-xs font-medium text-red-500 mt-5'>{error}</p>
+            )}
+              <div className='flex justify-end mt-7 '>
+                <button 
+                className='add-btn '
+                onClick={handleSubmit}
+                disabled={loading}
+                >
+                {taskId ? "UPDATE TASK" : "CREATE TASK"}
+                </button>
+              </div>
+          
+            </div>
+
 
             
           </div>
